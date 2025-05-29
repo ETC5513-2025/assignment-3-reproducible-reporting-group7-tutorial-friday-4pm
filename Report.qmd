@@ -4,4 +4,6 @@ format: html
 editor: visual
 ---
 
-## 
+## Executive Summary
+
+Social media addiction may quietly affect students' ability to manage their time and emotions. This report explores the link between addiction levels and self-control using 2024 survey data. Students with higher addiction scores often showed significantly lower self-control. Based on these findings, it is recommended to provide proactive support through school programs and awareness workshops.
