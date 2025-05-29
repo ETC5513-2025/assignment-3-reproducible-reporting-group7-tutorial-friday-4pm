@@ -5,6 +5,7 @@ editor: visual
 ---
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## Executive Summary
 
 Social media addiction may quietly affect students' ability to manage their time and emotions. This report explores the link between addiction levels and self-control using 2024 survey data. Students with higher addiction scores often showed significantly lower self-control. Based on these findings, it is recommended to provide proactive support through school programs and awareness workshops.
@@ -221,8 +222,20 @@ The results showed that high levels of social media addiction had a strong impac
 -   @fig-conflict-num shows that the median number of conflicts between students (with addicted_score from 7 to 10) and their relatives and friends was 3 (minimum = 2, maximum = 5), while the median for medium group and low group were 2 and 1, respectively. This may indicates greater difficulty in controlling emotions in students in the high addiction group, leading to increased interpersonal conflicts.
 
 -   According to @fig-aca-impact, 100% of students in the highly addicted to social media reported that social media negatively affects their studies, compared to only 16% in the medium group and 0% in the low group. This states a significant decline in self-control abilities in academic performance among the high addiction group.
-=======
+
 ## Conclusion
 
 Normally, the time spent on social media cannot completely prove whether a person is addicted to social media or not, it depends on the purpose of using social media of that person. Besides, the level of conflict with relatives and learning results can also be affected by other external factors such as psychological factors, health, etc. However, these different factors are common traits of students addicted to social media. This was demonstrated through this analysis. The results of the analysis showed a clear relationship between the level of social media addiction and the decline in self-control in students. Students with high levels of social media addiction not only spent more time on social media, but also tended to have more interpersonal conflicts and were negatively affected in their academic performance. These findings suggest that excessive social media use can reduce students’ ability to control their time, emotions, and learning – three key aspects of personal and academic development.
->>>>>>> conclusion
+
+## Recommendation
+
+Based on the analysis results, we propose some solutions as follows:
+
+- First, education organisations should organize workshops to raise students' awareness of the negative impacts of social media abuse. 
+
+- Secondly, since they are spending too much time on social media, we suggest having digital marketing campaigns targeted to them, which help them become aware of these risky outcomes. For example: Run a campaign focused on the 30-day reducing time screen challenge.
+
+- Thirdly, both schools and parents need to coordinate to support students in developing time management and emotional regulation skills.
+
+- Finally, due to limitations in time and research resources, this analysis only focuses on the three most fundamental aspects of self-control ability and does not delve into the causes of social media addiction. Moreover, the number of study subjects in the low-addiction group was small, which may have led to bias in the analysis. To better support future research, we suggest collecting data across level groups evenly and expanding the scope of analysis to include psychological factors as well as the content that students typically engage with on social media. Clarifying the addictive factors will help draw deeper conclusions and develop more comprehensive intervention strategies or recommendations.
+
