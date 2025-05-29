@@ -4,4 +4,104 @@ format: html
 editor: visual
 ---
 
-## 
+## Result
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+```
+
+```{r}
+df <- read_csv(here::here("data/Students_social_media_addiction.csv")) %>%
+  mutate(
+    Affects_Academic_Performance = ifelse(Affects_Academic_Performance == "Yes", 1, 0),
+    Addiction_Level = case_when(
+      Addicted_Score <= 3 ~ "Low",
+      Addicted_Score <= 6 ~ "Medium",
+      TRUE ~ "High"
+    ),
+    Addiction_Level = factor(Addiction_Level, levels = c("Low", "Medium", "High"))
+  )
+```
+
+```{r}
+#| label: fig-usage-hours
+#| fig-cap: "Daily Social Media Usage by Addiction Level"
+ggplot(df, aes(x = Addiction_Level, y = Avg_Daily_Usage_Hours, fill = Addiction_Level)) +
+  geom_boxplot(alpha = 0.85, width = 0.6, outlier.color = "darkgray", outlier.shape = 16) +
+  scale_fill_brewer(palette = "Blues") +
+  labs(
+    x = "Addiction Level",
+    y = "Average Daily Usage Hours"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(size = 12, face = "bold"),
+    axis.title = element_text(size = 10),
+    axis.text = element_text(size = 9),
+    panel.grid.major.y = element_line(color = "gray90"),
+    panel.grid.minor = element_blank(),
+    legend.position = "none",
+    aspect.ratio = 1.2)
+```
+
+```{r}
+#| label: fig-conflict-num
+#| fig-cap: "Number of Social Conflicts by Addiction Level"
+ggplot(df, aes(x = Addiction_Level, y = Conflicts_Over_Social_Media, fill = Addiction_Level)) +
+  geom_boxplot(alpha = 0.85, width = 0.6, outlier.color = "darkgray", outlier.shape = 16) +
+  scale_fill_brewer(palette = "Blues") +
+  labs(
+    x = "Addiction Level",
+    y = "Number of Conflicts"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(size = 12, face = "bold"),
+    axis.title = element_text(size = 10),
+    axis.text = element_text(size = 9),
+    panel.grid.major.y = element_line(color = "gray90"),
+    panel.grid.minor = element_blank(),
+    legend.position = "none",
+    aspect.ratio = 1.2)
+```
+
+```{r}
+#| label: fig-aca-impact
+#| fig-cap: "Percentage of Students Reporting Academic Impact by Addiction Level"
+
+df_summary <- df %>%
+  group_by(Addiction_Level) %>%
+  summarise(
+    Count = n(),
+    Affected = sum(Affects_Academic_Performance),
+    Percentage = Affected / Count * 100
+  )
+
+ggplot(df_summary, aes(x = Addiction_Level, y = Percentage, fill = Addiction_Level)) +
+  geom_col(alpha = 0.85, width = 0.6, color = "black") +
+  scale_fill_brewer(palette = "Blues") +
+  labs(
+    x = "Addiction Level",
+    y = "Academic Impact (%)"
+  ) +
+  geom_hline(yintercept = 0, color = "black", linewidth = 0.6) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(size = 12, face = "bold"),
+    axis.title = element_text(size = 10),
+    axis.text = element_text(size = 9),
+    panel.grid.major.y = element_line(color = "gray90"),
+    panel.grid.minor = element_blank(),
+    legend.position = "none",
+    aspect.ratio = 1.2)
+```
+
+The results showed that high levels of social media addiction had a strong impact on students' self-control, including negative impacts on three aspects: time management, emotions, and academic achievement.
+
+-   As shown in @fig-usage-hours, students in the high addiction group spent nearly 6 hours per day on social media, which was significantly higher than the medium addiction group (4 hours) and low addiction group (3.5 hours). This reflects that the high addiction group struggled with allocating moderate time for using social media.
+
+-   @fig-conflict-num shows that the median number of conflicts between students (with addicted_score from 7 to 10) and their relatives and friends was 3 (minimum = 2, maximum = 5), while the median for medium group and low group were 2 and 1, respectively. This may indicates greater difficulty in controlling emotions in students in the high addiction group, leading to increased interpersonal conflicts.
+
+-   According to @fig-aca-impact, 100% of students in the highly addicted to social media reported that social media negatively affects their studies, compared to only 16% in the medium group and 0% in the low group. This states a significant decline in self-control abilities in academic performance among the high addiction group.
