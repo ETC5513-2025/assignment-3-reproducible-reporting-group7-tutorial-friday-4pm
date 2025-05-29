@@ -1,17 +1,241 @@
 ---
 title: "5513 - Assignment 3"
 format: html
+knitr:
+  opts_chunk:
+    warning: false
+    message: false
+    eval: true
+    echo: false
 editor: visual
 ---
 
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(knitr)
+```
 
 ## Executive Summary
 
 Social media addiction may quietly affect students' ability to manage their time and emotions. This report explores the link between addiction levels and self-control using 2024 survey data. Students with higher addiction scores often showed significantly lower self-control. Based on these findings, it is recommended to provide proactive support through school programs and awareness workshops.
 
-
 ## Introduction
 
 Social media has become essential to students’ daily routines, often influencing how they spend their time and interact with others. While it provides entertainment and connection, growing dependence on these platforms can lead to addictive behaviours. One area of interest is whether frequent and potentially addictive social media use might influence students’ ability to manage other important aspects of life, such as academics, relationships, and personal responsibilities, which are often associated with self-control. However, there are few references on whether heavy social media use interferes with these behaviours or not. To explore this, we investigate whether higher levels of social media addiction are associated with lower levels of self-control among students. Using survey data collected in 2024, we analyse responses related to addiction levels and behavioural outcomes. The findings aim to reveal how digital habits impact student well-being. This may help inform strategies to promote healthier online behaviour.
 
+## Methodology
+
+### 1. Analytical Approach
+
+Our research question is: Will the addiction to social media reduce student's sense of self-control?
+
+To answer this question, we used the [Students Social Media Addiction](https://www.kaggle.com/datasets/adilshamim8/social-media-addiction-vs-relationships) data set. We selected 4 variables from it for analysis, We divided the Addicted_Level into 3 groups based on their level of social media addiction (Low, Medium, High), and analyzed the self-control ability through 3 aspects of each group.
+
+### 2. Data description
+
+The details of the dataset’s variables and their descriptions:
+
+Student_ID: Unique identifier for each student
+
+Addicted_Level: Level of social media addiction of the student (1-3: Low, 4-6: Medium, 7-10: High）
+
+Avg_Daily_Usage_Hours： Number of hours students spends using social media per day
+
+Conflicts_Over_Social_Media： Reported number of arguments or disagreements student have with their family, friends and/or partners
+
+Affects_Academic_Performance： Student have had their academic result impacted by using social media (1: Yes, 0: No)
+
+### 3. Cleaning Data {#sec-cleaning}
+
+```{r}
+raw_data <- read_csv("data/Students_Social_Media_Addiction.csv")
+processed_data <- raw_data %>%
+  mutate(Addicted_Level = case_when(
+            Addicted_Score <= 3 ~ "Low",
+            Addicted_Score <= 6 ~ "Medium",
+            TRUE ~ "High"
+        ),
+        Addicted_Level = factor(Addicted_Level, levels = c("Low", "Medium", "High")),
+    Affects_Academic_Performance = ifelse(Affects_Academic_Performance == "Yes", 1, 0)
+        ) %>%
+  select(Student_ID,
+         Addicted_Level,
+         Avg_Daily_Usage_Hours, 
+         Conflicts_Over_Social_Media, 
+         Affects_Academic_Performance)
+
+write_csv(processed_data, "data/processed_data.csv")
+```
+
+The @sec-cleaning shows details of processing data:
+
+-   Addicted_Score variable was replaced by Addicted_Level containing three level of social media addiction:
+
+    -   1 to 3: Low
+
+    -   4 to 6: Medium
+
+    -   7 to 10: High
+
+-   Affects_Academic_Performance variable was converted from “Yes/No” into "1/0" for statistical analysis purpose.
+
+-   Incomplete records were removed from Processed_data.
+
+### 4. Descriptive Statistics
+
+The @fig-summary shows the number of students in each group of addiction level. The majority of examined students had moderate to high levels of social media addiction, with over 400 students and nearly 300 students, respectively. While the figure for the low group was only around 20.
+
+```{r}
+#| label: fig-summary
+#| fig-cap: "Number of Students by Addiction Level"
+
+ggplot(processed_data, aes(x = Addicted_Level)) +
+  geom_bar() +
+  labs(
+    x = "Addiction Level",
+    y = "Count of Students"
+  ) +
+  theme_minimal()
+```
+
+The @tbl-summary summarise the mean, median, standard deviation, minimum, and maximum values for variables representing self-control of the entire sample.
+
+-   Avg_Daily_Usage_Hours: Examined students have spent around 4.8 hours per day using social platforms. Minimum usage hour recorded is 1.5 hours, while the maximum is 8.5 hours, which indicates a clear difference.
+
+-   Conflicts_Over_Social_Media: Students have a median of 3 conflicts with other people who are close to them. Although some do not have any conflict occurring between them and their loved one, some still have had 5 conflicts.
+
+-   Affects_Academic_Performance: 64% of students of the entire sample agree that their studies have been impacted negatively by using social media.
+
+```{r}
+#| label: tbl-summary
+#| tbl-cap: "Summary statistics of thre dependent variables"
+library(tidyr)
+library(knitr)
+summary_vars <- processed_data %>%
+  select(Avg_Daily_Usage_Hours, Conflicts_Over_Social_Media, Affects_Academic_Performance)
+
+summary_table <- summary_vars %>%
+  summarise(across(
+    everything(),
+    list(
+      Mean = ~mean(.x, na.rm = TRUE),
+      Median = ~median(.x, na.rm = TRUE),
+      SD = ~sd(.x, na.rm = TRUE),
+      Min = ~min(.x, na.rm = TRUE),
+      Max = ~max(.x, na.rm = TRUE)
+    )
+  )) %>%
+  pivot_longer(
+    cols = everything(),
+    names_to = c("Variable", "Statistic"),
+    names_pattern = "^(.*)_(Mean|Median|SD|Min|Max)$"
+  ) %>%
+  pivot_wider(
+    names_from = Statistic,
+    values_from = value
+  )
+kable(summary_table, digits = 2)
+```
+
+## Result
+
+```{r}
+#| label: fig-usage-hours
+#| fig-cap: "Daily Social Media Usage by Addiction Level"
+ggplot(processed_data, aes(x = Addicted_Level, y = Avg_Daily_Usage_Hours, fill = Addicted_Level)) +
+  geom_boxplot(alpha = 0.85, width = 0.6, outlier.color = "darkgray", outlier.shape = 16) +
+  scale_fill_brewer(palette = "Blues") +
+  labs(
+    x = "Addiction Level",
+    y = "Average Daily Usage Hours"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(size = 12, face = "bold"),
+    axis.title = element_text(size = 10),
+    axis.text = element_text(size = 9),
+    panel.grid.major.y = element_line(color = "gray90"),
+    panel.grid.minor = element_blank(),
+    legend.position = "none",
+    aspect.ratio = 1.2)
+```
+
+```{r}
+#| label: fig-conflict-num
+#| fig-cap: "Number of Social Conflicts by Addiction Level"
+ggplot(processed_data, aes(x = Addicted_Level, y = Conflicts_Over_Social_Media, fill = Addicted_Level)) +
+  geom_boxplot(alpha = 0.85, width = 0.6, outlier.color = "darkgray", outlier.shape = 16) +
+  scale_fill_brewer(palette = "Blues") +
+  labs(
+    x = "Addiction Level",
+    y = "Number of Conflicts"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(size = 12, face = "bold"),
+    axis.title = element_text(size = 10),
+    axis.text = element_text(size = 9),
+    panel.grid.major.y = element_line(color = "gray90"),
+    panel.grid.minor = element_blank(),
+    legend.position = "none",
+    aspect.ratio = 1.2)
+```
+
+```{r}
+#| label: fig-aca-impact
+#| fig-cap: "Percentage of Students Reporting Academic Impact by Addiction Level"
+
+percentage_summary <- processed_data %>%
+  group_by(Addicted_Level) %>%
+  summarise(
+    Count = n(),
+    Affected = sum(Affects_Academic_Performance),
+    Percentage = Affected / Count * 100
+  )
+
+ggplot(percentage_summary, aes(x = Addicted_Level, y = Percentage, fill = Addicted_Level)) +
+  geom_col(alpha = 0.85, width = 0.6, color = "black") +
+  scale_fill_brewer(palette = "Blues") +
+  labs(
+    x = "Addiction Level",
+    y = "Academic Impact (%)"
+  ) +
+  geom_hline(yintercept = 0, color = "black", linewidth = 0.6) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(size = 12, face = "bold"),
+    axis.title = element_text(size = 10),
+    axis.text = element_text(size = 9),
+    panel.grid.major.y = element_line(color = "gray90"),
+    panel.grid.minor = element_blank(),
+    legend.position = "none",
+    aspect.ratio = 1.2)
+```
+
+The results showed that high levels of social media addiction had a strong impact on students' self-control, including negative impacts on three aspects: time management, emotions, and academic achievement.
+
+-   As shown in @fig-usage-hours, students in the high addiction group spent nearly 6 hours per day on social media, which was significantly higher than the medium addiction group (4 hours) and low addiction group (3.5 hours). This reflects that the high addiction group struggled with allocating moderate time for using social media.
+
+-   @fig-conflict-num shows that the median number of conflicts between students (with addicted_score from 7 to 10) and their relatives and friends was 3 (minimum = 2, maximum = 5), while the median for medium group and low group were 2 and 1, respectively. This may indicates greater difficulty in controlling emotions in students in the high addiction group, leading to increased interpersonal conflicts.
+
+-   According to @fig-aca-impact, 100% of students in the highly addicted to social media reported that social media negatively affects their studies, compared to only 16% in the medium group and 0% in the low group. This states a significant decline in self-control abilities in academic performance among the high addiction group.
+
+## Conclusion
+
+Normally, the time spent on social media cannot completely prove whether a person is addicted to social media or not, it depends on the purpose of using social media of that person. Besides, the level of conflict with relatives and learning results can also be affected by other external factors such as psychological factors, health, etc. However, these different factors are common traits of students addicted to social media. This was demonstrated through this analysis. The results of the analysis showed a clear relationship between the level of social media addiction and the decline in self-control in students. Students with high levels of social media addiction not only spent more time on social media, but also tended to have more interpersonal conflicts and were negatively affected in their academic performance. These findings suggest that excessive social media use can reduce students’ ability to control their time, emotions, and learning – three key aspects of personal and academic development.
+
+## Recommendation
+
+Based on the analysis results, we propose some solutions as follows:
+
+- First, education organisations should organize workshops to raise students' awareness of the negative impacts of social media abuse. 
+
+- Secondly, since they are spending too much time on social media, we suggest having digital marketing campaigns targeted to them, which help them become aware of these risky outcomes. For example: Run a campaign focused on the 30-day reducing time screen challenge.
+
+- Thirdly, both schools and parents need to coordinate to support students in developing time management and emotional regulation skills.
+
+- Finally, due to limitations in time and research resources, this analysis only focuses on the three most fundamental aspects of self-control ability and does not delve into the causes of social media addiction. Moreover, the number of study subjects in the low-addiction group was small, which may have led to bias in the analysis. To better support future research, we suggest collecting data across level groups evenly and expanding the scope of analysis to include psychological factors as well as the content that students typically engage with on social media. Clarifying the addictive factors will help draw deeper conclusions and develop more comprehensive intervention strategies or recommendations.
 
