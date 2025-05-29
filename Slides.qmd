@@ -1,0 +1,38 @@
+---
+title: "Social Media Addiction and Student Self-Control"
+author: "ETC5513 Assignment-3, Group-7"
+format: revealjs
+theme: solarized
+slide-number: true
+transition: slide 
+incremental: true
+logo: logo.png 
+toc: true
+---
+
+ 
+## Executive Summary
+
+-   We explored if social media addiction affects students’ self-control.
+-   2024 survey data shows higher addiction links to lower self-control.
+-   This insight can help guide parents and schools to support healthier habits.
+
+
+## Introduction
+
+-   Social media is a major part of students’ daily lives.
+-   While it offers connection and entertainment, overuse may impact behaviour.
+-   We are concerned that heavy use could reduce students’ self-control.
+-   This study explores the possible link between addiction and self-regulation.
+
+
+
+## Data Description
+
+## methods
+
+## Results
+
+## Conclusion
+
+## recommendations
