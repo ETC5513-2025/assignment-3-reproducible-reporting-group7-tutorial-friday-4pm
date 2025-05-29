@@ -4,4 +4,122 @@ format: html
 editor: visual
 ---
 
-## 
+## Methodology
+
+### 1. Analytical Approach
+
+Our research question is: Will the addiction to social media reduce student's sense of self-control?
+
+To answer this question, we used the [Students Social Media Addiction](https://www.kaggle.com/datasets/adilshamim8/social-media-addiction-vs-relationships) data set. We selected 4 variables from it for analysis, We divided the Addicted_Level into 3 groups based on their level of social media addiction (Low, Medium, High), and analyzed the self-control ability through 3 aspects of each group.
+
+### 2. Data description
+
+The details of the dataset’s variables and their descriptions:
+
+Student_ID: Unique identifier for each student
+
+Addicted_Level: Level of social media addiction of the student (1-3: Low, 4-6: Medium, 7-10: High）
+
+Avg_Daily_Usage_Hours： Number of hours students spends using social media per day
+
+Conflicts_Over_Social_Media： Reported number of arguments or disagreements student have with their family, friends and/or partners
+
+Affects_Academic_Performance： Student have had their academic result impacted by using social media (1: Yes, 0: No)
+
+### 3. Cleaning Data {#sec-cleaning}
+
+```{r}
+library(dplyr)
+library(readr)
+raw_data <- read_csv("data/Students_Social_Media_Addiction.csv")
+processed_data <- raw_data %>%
+  mutate(Addicted_Level = case_when(
+            Addicted_Score <= 3 ~ "Low",
+            Addicted_Score <= 6 ~ "Medium",
+            TRUE ~ "High"
+        ),
+        Addicted_Level = factor(Addicted_Level, levels = c("Low", "Medium", "High")),
+    Affects_Academic_Performance = ifelse(Affects_Academic_Performance == "Yes", 1, 0)
+        ) %>%
+  select(Student_ID,
+         Addicted_Level,
+         Avg_Daily_Usage_Hours, 
+         Conflicts_Over_Social_Media, 
+         Affects_Academic_Performance)
+
+write_csv(processed_data, "data/processed_data.csv")
+
+head(processed_data)
+```
+
+The @sec-cleaning shows details of processing data:
+
+-   Addicted_Score variable was replaced by Addicted_Level containing three level of social media addiction:
+
+    -   1 to 3: Low
+
+    -   4 to 6: Medium
+
+    -   7 to 10: High
+
+-   Affects_Academic_Performance variable was converted from “Yes/No” into "1/0" for statistical analysis purpose.
+
+-   Incomplete records were removed from Processed_data.
+
+### 4. Descriptive Statistics
+
+The @fig-summary shows the number of students in each group of addiction level. The majority of examined students had moderate to high levels of social media addiction, with over 400 students and nearly 300 students, respectively. While the figure for the low group was only around 20.
+
+```{r}
+#| label: fig-summary
+#| fig-cap: "Number of Students by Addiction Level"
+
+library(ggplot2)
+
+ggplot(processed_data, aes(x = Addicted_Level)) +
+  geom_bar() +
+  labs(
+    x = "Addiction Level",
+    y = "Count of Students"
+  ) +
+  theme_minimal()
+```
+
+The @tbl-summary summarise the mean, median, standard deviation, minimum, and maximum values for variables representing self-control of the entire sample.
+
+-   Avg_Daily_Usage_Hours: Examined students have spent around 4.8 hours per day using social platforms. Minimum usage hour recorded is 1.5 hours, while the maximum is 8.5 hours, which indicates a clear difference.
+
+-   Conflicts_Over_Social_Media: Students have a median of 3 conflicts with other people who are close to them. Although some do not have any conflict occurring between them and their loved one, some still have had 5 conflicts.
+
+-   Affects_Academic_Performance: 64% of students of the entire sample agree that their studies have been impacted negatively by using social media.
+
+```{r}
+#| label: tbl-summary
+#| tbl-cap: "Summary statistics of thre dependent variables"
+library(tidyr)
+library(knitr)
+summary_vars <- processed_data %>%
+  select(Avg_Daily_Usage_Hours, Conflicts_Over_Social_Media, Affects_Academic_Performance)
+
+summary_table <- summary_vars %>%
+  summarise(across(
+    everything(),
+    list(
+      Mean = ~mean(.x, na.rm = TRUE),
+      Median = ~median(.x, na.rm = TRUE),
+      SD = ~sd(.x, na.rm = TRUE),
+      Min = ~min(.x, na.rm = TRUE),
+      Max = ~max(.x, na.rm = TRUE)
+    )
+  )) %>%
+  pivot_longer(
+    cols = everything(),
+    names_to = c("Variable", "Statistic"),
+    names_pattern = "^(.*)_(Mean|Median|SD|Min|Max)$"
+  ) %>%
+  pivot_wider(
+    names_from = Statistic,
+    values_from = value
+  )
+kable(summary_table, digits = 2)
+```
