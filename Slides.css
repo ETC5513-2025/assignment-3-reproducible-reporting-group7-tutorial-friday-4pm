@@ -1,0 +1,48 @@
+.reveal .slides section {
+  padding-top: 0cm;
+  padding-bottom: 0cm;
+  padding-left: 0cm;
+  padding-right: 0cm;
+  box-sizing: border-box;
+}
+
+.reveal table,
+.reveal img, 
+.reveal pre, 
+.reveal .cell-output-display {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+
+.reveal .slide h1,
+.reveal .slide h2,
+.reveal .slide h3 {
+  text-align: left;
+  margin-top: 0;
+  color: #2171b5;
+}
+
+.reveal {
+  font-size: 30px;
+}
+
+.reveal table {
+  font-size: 18px;
+  width: 100%;
+  table-layout: auto;
+}
+
+.reveal h1.title {
+  color: #2171b5;
+}
+
+.reveal strong {
+  color: #003366;
+  font-weight: bold;
+}
+
+.reveal ul li::marker {
+  color: #6baed6; 
+  font-size: 1.2em;
+}
