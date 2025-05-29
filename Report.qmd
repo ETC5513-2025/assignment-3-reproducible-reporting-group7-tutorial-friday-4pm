@@ -4,6 +4,14 @@ format: html
 editor: visual
 ---
 
+## Executive Summary
+
+Social media addiction may quietly affect students' ability to manage their time and emotions. This report explores the link between addiction levels and self-control using 2024 survey data. Students with higher addiction scores often showed significantly lower self-control. Based on these findings, it is recommended to provide proactive support through school programs and awareness workshops.
+
+## Introduction
+
+Social media has become essential to students’ daily routines, often influencing how they spend their time and interact with others. While it provides entertainment and connection, growing dependence on these platforms can lead to addictive behaviours. One area of interest is whether frequent and potentially addictive social media use might influence students’ ability to manage other important aspects of life, such as academics, relationships, and personal responsibilities, which are often associated with self-control. However, there are few references on whether heavy social media use interferes with these behaviours or not. To explore this, we investigate whether higher levels of social media addiction are associated with lower levels of self-control among students. Using survey data collected in 2024, we analyse responses related to addiction levels and behavioural outcomes. The findings aim to reveal how digital habits impact student well-being. This may help inform strategies to promote healthier online behaviour.
+
 ## Methodology
 
 ### 1. Analytical Approach
@@ -123,3 +131,5 @@ summary_table <- summary_vars %>%
   )
 kable(summary_table, digits = 2)
 ```
+
+## 
