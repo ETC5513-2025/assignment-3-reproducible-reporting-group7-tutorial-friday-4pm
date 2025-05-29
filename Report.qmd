@@ -27,19 +27,12 @@ library(knitr)
 
 By examining on 705 students from 2024 survey data, we explored that high social media addiction level reduces student's self control. Students with high addiction level become less capable of manage their time and emotions, spend 6 hours scrolling per day and have 3 conflicts with their loved one. Moreover, 100% students in high addiction level group agreed that their grades were effected negatively. Based on these findings, it is recommended to provide proactive support through school programs, awareness workshops and digital campaign.
 
-<<<<<<< HEAD
 ## 2. Introduction
 
 Social media has become essential to students’ daily routines, often influencing how they spend their time and interact with others. While it provides entertainment and connection, growing dependence on these platforms can lead to addictive behaviours. One area of interest is whether frequent and potentially addictive social media use might influence students’ ability to manage other important aspects of life, such as academics, relationships, and personal responsibilities, which are often associated with self-control. However, there are few references on whether heavy social media use interferes with these behaviours or not. To explore this, we investigate whether higher levels of social media addiction are associated with lower levels of self-control among students. Using survey data collected in 2024, we analyse responses related to addiction levels and behavioural outcomes. The findings aim to reveal how digital habits impact student well-being. This may help inform strategies to promote healthier online behaviour.
-=======
-1.  Maybe student's consumption of negative content on social media affects their mental health and behavior, including posts that call for toxic self-expression, support self-righteousness, etc.
-
-2.  Excessive screen time can increase stress in young people (Martin P. Paulus et al., 2023). Because of the psychological instability caused by screen light, they may have harsh reactions, get angry easily, and often argue with others more.
->>>>>>> discussion
 
 ## 3. Methodology
 
-<<<<<<< HEAD
 ### 3.1. Analytical Approach
 
 Our research question is: Will the addiction to social media reduce student's sense of self-control?
@@ -256,6 +249,22 @@ The results showed that high levels of social media addiction had a strong impac
 
 -   According to @fig-aca-impact, 100% of students in the highly addicted to social media reported that social media negatively affects their studies, compared to only 16% in the medium group and 0% in the low group. This states a significant decline in self-control abilities in academic performance among the high addiction group.
 
+## 5. Discussion
+
+**Number of hours students spends using social media per day:** Students might become so indulged in social media that they lose track of their time. This time allocation reduces the amount of time they have for other activities, which not only affects them in the short term, but in the long term. They can lose a large amount of time that they could have spent on personal development, family, friends and society.
+
+**Reported number of arguments or disagreements student have with their family, friends and/or partners:** Social media addiction increases the likelihood of students having conflicts with others. There are two causes or mediating factors may explain this result:
+
+1.  Maybe student's consumption of negative content on social media affects their mental health and behavior, including posts that call for toxic self-expression, support self-righteousness, etc.
+
+2.  Excessive screen time can increase stress in young people (Martin P. Paulus et al., 2023). Because of the psychological instability caused by screen light, they may have harsh reactions, get angry easily, and often argue with others more.
+
+**Student have had their academic result impacted by using social media:** Here are two potential explanations:
+
+1.  Spending too much time on social media takes away from the time students could have spent on studying. A student who would have had 6 hours to do homework and review lessons spends that time on social media.
+
+2.  The brain tends to prefer easy activities. Studying requires the brain to work hard, while surfing social media does not require students to think much. Over time, students may find it difficult and exhausting to think or analyze logically.
+
 ## 6. Conclusion
 
 Normally, the time spent on social media cannot completely prove whether a person is addicted to social media or not, it depends on the purpose of using social media of that person. Besides, the level of conflict with relatives and learning results can also be affected by other external factors such as psychological factors, health, etc. However, these different factors are common traits of students addicted to social media. This was demonstrated through this analysis. The results of the analysis showed a clear relationship between the level of social media addiction and the decline in self-control in students. Students with high levels of social media addiction not only spent more time on social media, but also tended to have more interpersonal conflicts and were negatively affected in their academic performance. These findings suggest that excessive social media use can reduce students’ ability to control their time, emotions, and learning – three key aspects of personal and academic development.
@@ -271,8 +280,3 @@ Based on the analysis results, we propose some solutions as follows:
 -   Thirdly, both schools and parents need to coordinate to support students in developing time management and emotional regulation skills.
 
 -   Finally, due to limitations in time and research resources, this analysis only focuses on the three most fundamental aspects of self-control ability and does not delve into the causes of social media addiction. Moreover, the number of study subjects in the low-addiction group was small, which may have led to bias in the analysis. To better support future research, we suggest collecting data across level groups evenly and expanding the scope of analysis to include psychological factors as well as the content that students typically engage with on social media. Clarifying the addictive factors will help draw deeper conclusions and develop more comprehensive intervention strategies or recommendations.
-=======
-1.  Spending too much time on social media takes away from the time students could have spent on studying. A student who would have had 6 hours to do homework and review lessons spends that time on social media.
-
-2.  The brain tends to prefer easy activities. Studying requires the brain to work hard, while surfing social media does not require students to think much. Over time, students may find it difficult and exhausting to think or analyze logically.
->>>>>>> discussion
