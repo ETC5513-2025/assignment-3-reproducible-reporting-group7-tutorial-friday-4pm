@@ -2,8 +2,8 @@
 
 Group Members:
 
-*
-*
-*
+* Kim Yen Le
+* Yuehan Zhou
+* Nishta Bollavaram
 
-Topic: 
+Topic: Social Media Addiction and Student Self-Control
