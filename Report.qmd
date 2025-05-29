@@ -1,11 +1,23 @@
 ---
 title: "5513 - Assignment 3"
 format: html
+knitr:
+  opts_chunk:
+    warning: false
+    message: false
+    eval: true
+    echo: false
 editor: visual
 ---
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(knitr)
+```
+
 ## Executive Summary
 
 Social media addiction may quietly affect students' ability to manage their time and emotions. This report explores the link between addiction levels and self-control using 2024 survey data. Students with higher addiction scores often showed significantly lower self-control. Based on these findings, it is recommended to provide proactive support through school programs and awareness workshops.
@@ -39,8 +51,6 @@ Affects_Academic_Performance： Student have had their academic result impacted 
 ### 3. Cleaning Data {#sec-cleaning}
 
 ```{r}
-library(dplyr)
-library(readr)
 raw_data <- read_csv("data/Students_Social_Media_Addiction.csv")
 processed_data <- raw_data %>%
   mutate(Addicted_Level = case_when(
@@ -58,8 +68,6 @@ processed_data <- raw_data %>%
          Affects_Academic_Performance)
 
 write_csv(processed_data, "data/processed_data.csv")
-
-head(processed_data)
 ```
 
 The @sec-cleaning shows details of processing data:
@@ -83,8 +91,6 @@ The @fig-summary shows the number of students in each group of addiction level. 
 ```{r}
 #| label: fig-summary
 #| fig-cap: "Number of Students by Addiction Level"
-
-library(ggplot2)
 
 ggplot(processed_data, aes(x = Addicted_Level)) +
   geom_bar() +
@@ -137,15 +143,9 @@ kable(summary_table, digits = 2)
 ## Result
 
 ```{r}
-library(tidyverse)
-library(ggplot2)
-library(dplyr)
-```
-
-```{r}
 #| label: fig-usage-hours
 #| fig-cap: "Daily Social Media Usage by Addiction Level"
-ggplot(df, aes(x = Addiction_Level, y = Avg_Daily_Usage_Hours, fill = Addiction_Level)) +
+ggplot(processed_data, aes(x = Addicted_Level, y = Avg_Daily_Usage_Hours, fill = Addicted_Level)) +
   geom_boxplot(alpha = 0.85, width = 0.6, outlier.color = "darkgray", outlier.shape = 16) +
   scale_fill_brewer(palette = "Blues") +
   labs(
@@ -166,7 +166,7 @@ ggplot(df, aes(x = Addiction_Level, y = Avg_Daily_Usage_Hours, fill = Addiction_
 ```{r}
 #| label: fig-conflict-num
 #| fig-cap: "Number of Social Conflicts by Addiction Level"
-ggplot(df, aes(x = Addiction_Level, y = Conflicts_Over_Social_Media, fill = Addiction_Level)) +
+ggplot(processed_data, aes(x = Addicted_Level, y = Conflicts_Over_Social_Media, fill = Addicted_Level)) +
   geom_boxplot(alpha = 0.85, width = 0.6, outlier.color = "darkgray", outlier.shape = 16) +
   scale_fill_brewer(palette = "Blues") +
   labs(
@@ -188,15 +188,15 @@ ggplot(df, aes(x = Addiction_Level, y = Conflicts_Over_Social_Media, fill = Addi
 #| label: fig-aca-impact
 #| fig-cap: "Percentage of Students Reporting Academic Impact by Addiction Level"
 
-df_summary <- df %>%
-  group_by(Addiction_Level) %>%
+percentage_summary <- processed_data %>%
+  group_by(Addicted_Level) %>%
   summarise(
     Count = n(),
     Affected = sum(Affects_Academic_Performance),
     Percentage = Affected / Count * 100
   )
 
-ggplot(df_summary, aes(x = Addiction_Level, y = Percentage, fill = Addiction_Level)) +
+ggplot(percentage_summary, aes(x = Addicted_Level, y = Percentage, fill = Addicted_Level)) +
   geom_col(alpha = 0.85, width = 0.6, color = "black") +
   scale_fill_brewer(palette = "Blues") +
   labs(
