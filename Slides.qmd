@@ -10,13 +10,11 @@ logo: logo.png
 toc: true
 ---
 
- 
 ## Executive Summary
 
 -   We explored if social media addiction affects students’ self-control.
 -   2024 survey data shows higher addiction links to lower self-control.
 -   This insight can help guide parents and schools to support healthier habits.
-
 
 ## Introduction
 
@@ -25,11 +23,81 @@ toc: true
 -   We are concerned that heavy use could reduce students’ self-control.
 -   This study explores the possible link between addiction and self-regulation.
 
-
-
-## Data Description
-
 ## methods
+
+#### **1: Analytical Approach**
+
+-   **Research Question**
+
+    Will the addiction to social media reduce student's sense of self-control?
+
+-   **Data Source**
+
+    Students Social Media Addiction data set
+
+-   **Selected Variables for Analysis**
+
+    Selected 4 variables from it for analysis.
+
+    Divided the Addicted_Level into 3 groups
+
+#### **2: Data Description**
+
+-   **Key Variables**
+
+    **Student_ID**
+
+    Unique identifier for each student
+
+    **Addicted_Level**
+
+    Social media addiction level *(1–3: Low, 4–6: Medium, 7–10: High)*
+
+    **Avg_Daily_Usage_Hours**
+
+    Average hours spent on social media per day
+
+    **Conflicts_Over_Social_Media**
+
+    Number of reported conflicts with family, friends, or partners
+
+    **Affects_Academic_Performance**
+
+    Academic impact indicator*(1 = Yes, 0 = No)*
+
+-   **Data Processing**
+
+    Addicted_Score → grouped into 3 levels(Low, Medium, High)
+
+    Converted Affects_Academic_Performance from Yes/No to 1/0
+
+    Removed incomplete records for cleaner analysis
+
+#### **3: Descriptive Statistics**
+
+-   **Addiction Level Distribution**
+
+    Medium: \~400 students
+
+    High: \~300 students
+
+    Low: \~20 students
+
+-   **Avg_Daily_Usage_Hours**
+
+    Mean: \~4.8 hours/day
+
+    Range: 1.5 to 8.5 hours
+
+-   **Conflicts_Over_Social_Media**
+
+    Median: 3 conflicts
+
+    Range: 0 to 5 conflicts
+
+-   **Affects_Academic_Performance**
+
+    64% reported negative academic impact due to social media
 
 ## Results
 
