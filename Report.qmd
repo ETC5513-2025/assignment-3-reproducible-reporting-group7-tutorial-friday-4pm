@@ -1,6 +1,10 @@
 ---
 title: "5513 - Assignment 3"
-format: html
+format: 
+  html:
+    embed-resources: true
+  pdf:
+      doc: true
 knitr:
   opts_chunk:
     warning: false
@@ -36,17 +40,28 @@ To answer this question, we used the [Students Social Media Addiction](https://w
 
 ### 2. Data description
 
-The details of the dataset’s variables and their descriptions:
+The @tbl-variables-summary shows the detail of the dataset’s variables and their descriptions.
 
-Student_ID: Unique identifier for each student
+```{r}
+#| label: tbl-variables-summary
 
-Addicted_Level: Level of social media addiction of the student (1-3: Low, 4-6: Medium, 7-10: High）
+variable_sum <- data.frame(
+  Variable = c("Student_ID",
+               "Addicted_Level",
+               "Avg_Daily_Usage_Hours", 
+               "Conflicts_Over_Social_Media",
+               "Affects_Academic_Performance"
+               ),
+  Description = c("Unique identifier for each student", 
+                  "Level of social media addiction of the student (1-3: Low, 4-6: Medium, 7-10: High)",
+                  "Number of hours students spends using social media per day",
+                  "Reported number of arguments or disagreements student have with their family, friends and/or partners",
+                  "Student have had their academic result impacted by using social media (1: Yes, 0: No)"
+                  )
+)
 
-Avg_Daily_Usage_Hours： Number of hours students spends using social media per day
-
-Conflicts_Over_Social_Media： Reported number of arguments or disagreements student have with their family, friends and/or partners
-
-Affects_Academic_Performance： Student have had their academic result impacted by using social media (1: Yes, 0: No)
+knitr::kable(variable_sum, caption = "Summary of dataset variables")
+```
 
 ### 3. Cleaning Data {#sec-cleaning}
 
@@ -231,11 +246,10 @@ Normally, the time spent on social media cannot completely prove whether a perso
 
 Based on the analysis results, we propose some solutions as follows:
 
-- First, education organisations should organize workshops to raise students' awareness of the negative impacts of social media abuse. 
+-   First, education organisations should organize workshops to raise students' awareness of the negative impacts of social media abuse.
 
-- Secondly, since they are spending too much time on social media, we suggest having digital marketing campaigns targeted to them, which help them become aware of these risky outcomes. For example: Run a campaign focused on the 30-day reducing time screen challenge.
+-   Secondly, since they are spending too much time on social media, we suggest having digital marketing campaigns targeted to them, which help them become aware of these risky outcomes. For example: Run a campaign focused on the 30-day reducing time screen challenge.
 
-- Thirdly, both schools and parents need to coordinate to support students in developing time management and emotional regulation skills.
+-   Thirdly, both schools and parents need to coordinate to support students in developing time management and emotional regulation skills.
 
-- Finally, due to limitations in time and research resources, this analysis only focuses on the three most fundamental aspects of self-control ability and does not delve into the causes of social media addiction. Moreover, the number of study subjects in the low-addiction group was small, which may have led to bias in the analysis. To better support future research, we suggest collecting data across level groups evenly and expanding the scope of analysis to include psychological factors as well as the content that students typically engage with on social media. Clarifying the addictive factors will help draw deeper conclusions and develop more comprehensive intervention strategies or recommendations.
-
+-   Finally, due to limitations in time and research resources, this analysis only focuses on the three most fundamental aspects of self-control ability and does not delve into the causes of social media addiction. Moreover, the number of study subjects in the low-addiction group was small, which may have led to bias in the analysis. To better support future research, we suggest collecting data across level groups evenly and expanding the scope of analysis to include psychological factors as well as the content that students typically engage with on social media. Clarifying the addictive factors will help draw deeper conclusions and develop more comprehensive intervention strategies or recommendations.
