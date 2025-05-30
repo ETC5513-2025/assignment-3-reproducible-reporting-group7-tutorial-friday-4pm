@@ -53,7 +53,7 @@ library(here)
 
 ## Dataset Description
 
-The dataset includes survey responses from **705 students** (Kaggle, 2024), covering behavioral and academic aspects of social media use.
+The dataset is from **Students Social Media Addiction** (Kaggle, 2024).
 
 ```{r}
 #| label: tbl-variables-summary
