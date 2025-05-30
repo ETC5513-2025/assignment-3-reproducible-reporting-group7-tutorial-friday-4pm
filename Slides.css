@@ -34,7 +34,14 @@
 }
 
 .reveal h1.title {
+  color: #002f6c;
+}
+
+.reveal .subtitle {
   color: #2171b5;
+  font-weight: 600;
+  font-size: 1.4em;
+  margin-top: 0.3em;
 }
 
 .reveal strong {
