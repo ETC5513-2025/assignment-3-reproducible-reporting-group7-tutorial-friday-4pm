@@ -190,7 +190,6 @@ summary_table <- summary_vars %>%
 kable(summary_table, digits = 2)
 ```
 
-
 ## Results: Usage Hours
 
 ```{r}
@@ -218,8 +217,11 @@ ggplot(processed_data, aes(x = Addicted_Level, y = Avg_Daily_Usage_Hours, fill =
 - High group: ~6 hours/day
 - Medium (4h) and Low (3.5h)
 
-## Results: Conflicts
+## Results: Conflicts & Academic Impact
 
+<div class="columns">
+
+::: {.column width="50%"}
 ```{r}
 #| label: fig-conflict-num
 #| fig-cap: "Number of Social Conflicts by Addiction Level"
@@ -241,13 +243,9 @@ ggplot(processed_data, aes(x = Addicted_Level, y = Conflicts_Over_Social_Media, 
     legend.position = "none",
 )
 ```
+:::
 
-Median conflicts:
-
-→ High = 3, Medium = 2, Low = 1
-
-## Results: Academic Impact
-
+::: {.column width="50%"}
 ```{r}
 #| label: fig-aca-impact
 #| fig-cap: "Percentage of Students Reporting Academic Impact by Addiction Level"
@@ -278,8 +276,16 @@ ggplot(percentage_summary, aes(x = Addicted_Level, y = Percentage, fill = Addict
     legend.position = "none",
 )
 ```
+:::
+</div>
 
-→ 100% of students in the High addiction group reported academic impact
+**Key Findings**
+
+- Conflicts: 
+
+  - Median: High = 3, Medium = 2, Low = 1
+
+- Academic impact: 100% High group affected
 
 ## Discussion & Conclusion
 
@@ -304,10 +310,4 @@ ggplot(percentage_summary, aes(x = Addicted_Level, y = Percentage, fill = Addict
 
 <div style="text-align: center;">
   <img src="images/recommendation.jpg" width="50%" />
-</div>
-
----
-
-<div style="height: 100%; display: flex; justify-content: center; align-items: center;">
-  <h1 style="color:#3182bd; font-size:60px;">Thank You for Listening!</h1>
 </div>
