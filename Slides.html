@@ -10,6 +10,7 @@
 <link href="Slides_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
+  <meta name="author" content="ETC5513 - Group 7:">
   <meta name="author" content="Kim Yen Le">
   <meta name="author" content="Yuehan Zhou">
   <meta name="author" content="Nishta Bollavaram">
@@ -330,8 +331,14 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Social Media Addiction and Student’s Self-Control</h1>
+  <p class="subtitle">Exploring impacts on time, emotions, and academics</p>
 
 <div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+ETC5513 - Group 7: 
+</div>
+</div>
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
 Kim Yen Le 
@@ -349,29 +356,14 @@ Nishta Bollavaram
 </div>
 </div>
 
-</section><section id="TOC">
-<nav role="doc-toc"> 
-<h2 id="toc-title">Table of contents</h2>
-<ul>
-<li class="fragment"><a href="#/executive-summary" id="/toc-executive-summary">Executive Summary</a></li>
-<li class="fragment"><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
-<li class="fragment"><a href="#/dataset-description" id="/toc-dataset-description">Dataset Description</a></li>
-<li class="fragment"><a href="#/methods" id="/toc-methods">Methods</a></li>
-<li class="fragment"><a href="#/descriptive-summary" id="/toc-descriptive-summary">Descriptive Summary</a></li>
-<li class="fragment"><a href="#/results-usage-hours" id="/toc-results-usage-hours">Results: Usage Hours</a></li>
-<li class="fragment"><a href="#/results-conflicts-academic-impact" id="/toc-results-conflicts-academic-impact">Results: Conflicts &amp; Academic Impact</a></li>
-<li class="fragment"><a href="#/discussion-conclusion" id="/toc-discussion-conclusion">Discussion &amp; Conclusion</a></li>
-<li class="fragment"><a href="#/recommendations" id="/toc-recommendations">Recommendations</a></li>
-</ul>
-</nav>
 </section>
 <section id="executive-summary" class="slide level2">
 <h2>Executive Summary</h2>
 <ul>
-<li class="fragment">Survey of 705 students from 16 - 25 years old (2024 data)</li>
-<li class="fragment">High social media addiction → lower self-control</li>
-<li class="fragment">High group: 6 hours/day usage, 3 conflicts, 100% report academic impact</li>
-<li class="fragment">Recommendation: school support, awareness workshops, digital campaigns</li>
+<li>Survey of 705 students from 16 - 25 years old (2024 data)</li>
+<li>High social media addiction → lower self-control</li>
+<li>High group: 6 hours/day usage, 3 conflicts, 100% report academic impact</li>
+<li>Recommendation: school support, awareness workshops, digital campaigns</li>
 </ul>
 <div style="text-align: center;">
 <p><img src="images/summary.png" width="60%"></p>
@@ -380,13 +372,13 @@ Nishta Bollavaram
 <section id="introduction" class="slide level2">
 <h2>Introduction</h2>
 <ul>
-<li class="fragment">Social media is a core part of student life<br>
+<li>Social media is a core part of student life<br>
 </li>
-<li class="fragment">Risks: Addiction may affect academics, emotions, relationships<br>
+<li>Risks: Addiction may affect academics, emotions, relationships<br>
 </li>
-<li class="fragment">Research gap: Unclear if heavy use lowers self-control<br>
+<li>Research gap: Unclear if heavy use lowers self-control<br>
 </li>
-<li class="fragment">Aim: Examine link between addiction level &amp; self-control</li>
+<li>Aim: Examine link between addiction level &amp; self-control</li>
 </ul>
 <div style="text-align: center;">
 <p><img src="images/introduction.png" width="60%"></p>
@@ -405,8 +397,8 @@ Table&nbsp;1: Summary of dataset variables
 <div class="cell-output-display">
 <table class="do-not-create-environment cell caption-top">
 <colgroup>
-<col style="width: 22%">
-<col style="width: 77%">
+<col style="width: 23%">
+<col style="width: 76%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -429,7 +421,7 @@ Table&nbsp;1: Summary of dataset variables
 </tr>
 <tr class="even">
 <td style="text-align: left;">Conflicts_Over_Social_Media</td>
-<td style="text-align: left;">Reported number of arguments or disagreements student have with their family, friends and/or partners</td>
+<td style="text-align: left;">Number of arguments or disagreements student have with their family, friends and/or partners</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Affects_Academic_Performance</td>
@@ -444,9 +436,12 @@ Table&nbsp;1: Summary of dataset variables
 </div>
 <p><strong>Processing data</strong></p>
 <ul>
-<li class="fragment"><p>Categorized <code>Addicted_Score</code> into <code>Addicted_Level</code>: Low (1–3), Medium (4–6), High (7–10)</p></li>
-<li class="fragment"><p>Recoded <code>Affects_Academic_Performance</code> to binary (1 = Yes, 0 = No)</p></li>
-<li class="fragment"><p>Removed irrelevant variables</p></li>
+<li><p>Categorized <code>Addicted_Score</code> into <code>Addicted_Level</code>:</p>
+<ul>
+<li><strong>Low (1–3)</strong>, <strong>Medium (4–6)</strong>, <strong>High (7–10)</strong></li>
+</ul></li>
+<li><p>Recoded <code>Affects_Academic_Performance</code> to binary (1 = Yes, 0 = No)</p></li>
+<li><p>Removed irrelevant variables</p></li>
 </ul>
 </section>
 <section id="methods" class="slide level2">
@@ -455,11 +450,11 @@ Table&nbsp;1: Summary of dataset variables
 <strong>Does social media addiction reduce students’ self-control?</strong></p>
 <p>To explore this, we examined differences across three addiction groups (Low / Medium / High) in relation to:</p>
 <ul>
-<li class="fragment"><strong>Time management</strong> → Avg_Daily_Usage_Hours<br>
+<li><strong>Time management</strong> → Avg_Daily_Usage_Hours<br>
 </li>
-<li class="fragment"><strong>Emotional regulation</strong> → Conflicts_Over_Social_Media<br>
+<li><strong>Emotional regulation</strong> → Conflicts_Over_Social_Media<br>
 </li>
-<li class="fragment"><strong>Academic impact</strong> → Affects_Academic_Performance</li>
+<li><strong>Academic impact</strong> → Affects_Academic_Performance</li>
 </ul>
 <p>We applied descriptive analysis, summarizing each variable by addiction group and visualizing patterns using bar plots and box plots.</p>
 </section>
@@ -484,10 +479,10 @@ Figure&nbsp;1: Number of Students by Addiction Level
 </div><div class="column" style="width:50%;">
 <p><strong>Summary Points</strong></p>
 <ul>
-<li class="fragment"><p>Majority: Medium–High addiction level</p></li>
-<li class="fragment"><p>Average daily use: 4.8h</p></li>
-<li class="fragment"><p>Conflicts: median = 3</p></li>
-<li class="fragment"><p>64% reported academic impact</p></li>
+<li><p>Main: Medium–High addiction level</p></li>
+<li><p>Average daily use: 4.8h</p></li>
+<li><p>Conflicts: median = 3</p></li>
+<li><p>64% reported academic impact</p></li>
 </ul>
 </div></div>
 <div class="cell">
@@ -544,78 +539,58 @@ Table&nbsp;2: Summary statistics of three dependent variables
 <img data-src="Slides_files/figure-revealjs/fig-usage-hours-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
 Figure&nbsp;2: Daily Social Media Usage by Addiction Level
 </p><ul>
-<li class="fragment">High group: ~6 hours/day</li>
-<li class="fragment">Medium (4h) and Low (3.5h)</li>
+<li>High group: ~6 hours/day</li>
+<li>Medium (4h) and Low (3.5h)</li>
 </ul>
 </section>
-<section id="results-conflicts-academic-impact" class="slide level2">
-<h2>Results: Conflicts &amp; Academic Impact</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-conflict-num" class="quarto-float quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-float-fig">
-<div aria-describedby="fig-conflict-num-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img data-src="Slides_files/figure-revealjs/fig-conflict-num-1.png" width="960">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-conflict-num-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<section id="results-conflicts" class="slide level2">
+<h2>Results: Conflicts</h2>
+
+<img data-src="Slides_files/figure-revealjs/fig-conflict-num-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
 Figure&nbsp;3: Number of Social Conflicts by Addiction Level
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-aca-impact" class="quarto-float quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-float-fig">
-<div aria-describedby="fig-aca-impact-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img data-src="Slides_files/figure-revealjs/fig-aca-impact-1.png" width="960">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-aca-impact-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+</p><p>Median conflicts:</p>
+<p>→ High = 3, Medium = 2, Low = 1</p>
+</section>
+<section id="results-academic-impact" class="slide level2">
+<h2>Results: Academic Impact</h2>
+
+<img data-src="Slides_files/figure-revealjs/fig-aca-impact-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
 Figure&nbsp;4: Percentage of Students Reporting Academic Impact by Addiction Level
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-<p><strong>Key Findings</strong></p>
-<ul>
-<li class="fragment"><p>Conflicts:</p>
-<ul>
-<li class="fragment">Median: High = 3, Medium = 2, Low = 1</li>
-</ul></li>
-<li class="fragment"><p>Academic impact: 100% High group affected</p></li>
-</ul>
+</p><p>→ 100% of students in the High addiction group reported academic impact</p>
 </section>
 <section id="discussion-conclusion" class="slide level2">
 <h2>Discussion &amp; Conclusion</h2>
 <h3 id="discussion">Discussion</h3>
 <ul>
-<li class="fragment"><strong>Time Loss</strong>: Students lose track of time → Less personal growth</li>
-<li class="fragment"><strong>Conflicts</strong>: Stress, Toxic content → More arguments</li>
-<li class="fragment"><strong>Academics</strong>: Social media displaces study time; Promotes low-effort habits</li>
+<li><strong>Time Loss</strong>: Students lose track of time → Less personal growth</li>
+<li><strong>Conflicts</strong>: Stress, Toxic content → More arguments</li>
+<li><strong>Academics</strong>: Social media displaces study time; Promotes low-effort habits</li>
 </ul>
 <h3 id="conclusion">Conclusion</h3>
 <ul>
-<li class="fragment">Clear link between addiction &amp; lower self-control</li>
-<li class="fragment">High users: more conflicts, time loss, poor academics</li>
-<li class="fragment">Suggests serious long-term developmental risks</li>
+<li>Clear link between addiction &amp; lower self-control</li>
+<li>High users: more conflicts, time loss, poor academics</li>
+<li>Suggests serious long-term developmental risks</li>
 </ul>
 </section>
 <section id="recommendations" class="slide level2">
 <h2>Recommendations</h2>
 <ul>
-<li class="fragment">Awareness workshops in schools</li>
-<li class="fragment">Digital detox challenges (e.g., 30-day screen reduction)</li>
-<li class="fragment">Parent-school coordination for support skills</li>
-<li class="fragment">Further research: expand sample &amp; examine psychological/addictive content</li>
+<li>Awareness workshops in schools</li>
+<li>Digital detox challenges (e.g., 30-day screen reduction)</li>
+<li>Parent-school coordination for support skills</li>
+<li>Further research: expand sample &amp; examine psychological/addictive content</li>
 </ul>
 <div style="text-align: center;">
 <p><img src="images/recommendation.jpg" width="50%"></p>
+</div>
+</section>
+<section class="slide level2">
+
+<div style="height: 100%; display: flex; justify-content: center; align-items: center;">
+<h1 style="color:#3182bd; font-size:60px;">
+Thank You for Listening!
+</h1>
 </div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
