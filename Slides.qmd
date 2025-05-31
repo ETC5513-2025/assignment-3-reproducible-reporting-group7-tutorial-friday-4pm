@@ -123,7 +123,7 @@ processed_data <- raw_data %>%
 #| fig-cap: "Number of Students by Addiction Level"
 
 ggplot(processed_data, aes(x = Addicted_Level, fill = Addicted_Level)) +
-  geom_bar(alpha = 0.85, width = 0.6, color = "black") +
+  geom_bar(alpha = 0.85, width = 0.6, color = "skyblue") +
   scale_fill_brewer(palette = "Blues") +
   labs(
     x = "Addiction Level",
@@ -252,7 +252,7 @@ percentage_summary <- processed_data %>%
   )
 
 ggplot(percentage_summary, aes(x = Addicted_Level, y = Percentage, fill = Addicted_Level)) +
-  geom_col(alpha = 0.85, width = 0.6, color = "black") +
+  geom_col(alpha = 0.85, width = 0.6, color = "skyblue") +
   scale_fill_brewer(palette = "Blues") +
   labs(
     x = "Addiction Level",
