@@ -2,20 +2,21 @@
 title: "5513 - Assignment 3"
 format: 
   html:
-    embed-resources: true
+    toc: true
+    toc-depth: 2
   pdf:
     toc: true
-    embed-resources: true
-knitr:
-  opts_chunk:
-    warning: false
-    message: false
-    eval: true
-    echo: false
+    toc-depth: 2
 bibliography: references.bib
 csl: APA7th.csl
 editor: visual
 ---
+
+```{r setup, include = TRUE, echo = FALSE, cache = FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  eval = TRUE)
+```
 
 ```{r}
 library(tidyverse)
@@ -34,13 +35,13 @@ Social media has become essential to students’ daily routines, often influenci
 
 ### 3.1. Analytical Approach
 
-Our research question is: Will the addiction to social media reduce student's sense of self-control?
+Research question: Will the addiction to social media reduce student's sense of self-control?
 
-To answer this question, we used 705 observations and 4 variables from the [Students Social Media Addiction](https://www.kaggle.com/datasets/adilshamim8/social-media-addiction-vs-relationships) dataset (see @sec-desc). We divided the Addicted_Level into 3 groups based on their level of social media addiction (Low, Medium, High), and analyzed the self-control ability through 3 aspects of each group.
+To answer this question, we used 705 observations and 4 variables from the [Students Social Media Addiction](https://www.kaggle.com/datasets/adilshamim8/social-media-addiction-vs-relationships) dataset. We divided Addicted_Level into three groups based on social media addiction level and analysed its relationship with self-control across three aspects for each group.
 
-### 3.2. Data description {#sec-desc}
+### 3.2. Data description
 
-The @tbl-variables-summary shows the detail of the dataset’s variables and their descriptions.
+@tbl-variables-summary shows the detail of the dataset’s variables and their descriptions.
 
 ```{r}
 #| label: tbl-variables-summary
@@ -54,16 +55,16 @@ variable_sum <- data.frame(
                ),
   Description = c("Unique identifier for each student", 
                   "Level of social media addiction of the student (1-3: Low, 4-6: Medium, 7-10: High)",
-                  "Number of hours students spends using social media per day",
-                  "Reported number of arguments or disagreements student have with their family, friends and/or partners",
-                  "Student have had their academic result impacted by using social media (1: Yes, 0: No)"
+                  "Daily hours students spend on social media",
+                  "Number of social media-related conflicts with family, friends, or partners",
+                  "Whether social media use affects academic results (1: Yes, 0: No)"
                   )
 )
 
 knitr::kable(variable_sum, caption = "Summary of dataset variables")
 ```
 
-### 3.3. Cleaning Data {#sec-cleaning}
+### 3.3. Cleaning Data
 
 ```{r}
 raw_data <- read_csv("data/Students_Social_Media_Addiction.csv")
@@ -85,9 +86,7 @@ processed_data <- raw_data %>%
 write_csv(processed_data, "data/processed_data.csv")
 ```
 
-The @sec-cleaning shows details of processing data:
-
--   Addicted_Score variable was replaced by Addicted_Level containing three level of social media addiction:
+-   `Addicted_Score variable` was replaced by Addicted_Level containing three level of social media addiction:
 
     -   1 to 3: Low
 
@@ -95,13 +94,13 @@ The @sec-cleaning shows details of processing data:
 
     -   7 to 10: High
 
--   Affects_Academic_Performance variable was converted from “Yes/No” into "1/0" for statistical analysis purpose.
+-   `Affects_Academic_Performance` was converted from “Yes/No” into "1/0".
 
 -   Irrelevant variables were removed.
 
 ### 3.4. Descriptive Statistics
 
-The @fig-summary shows the number of students in each group of addiction level. The majority of examined students had moderate to high levels of social media addiction, with over 400 students and nearly 300 students, respectively. While the figure for the low group was only around 20.
+According to @fig-summary, the majority of the sample had *medium* (300 students) to *high* (400 students) levels of addiction. While the figure for the low group was only 20.
 
 ```{r}
 #| label: fig-summary
@@ -126,13 +125,13 @@ ggplot(processed_data, aes(x = Addicted_Level, fill = Addicted_Level)) +
     aspect.ratio = 1.2)
 ```
 
-The @tbl-summary summarise the mean, median, minimum, and maximum values for variables representing self-control of the entire sample.
+@tbl-summary summarise the mean, median, minimum, and maximum values for variables representing self-control of the entire sample.
 
--   Avg_Daily_Usage_Hours: Students have spent around 4.8 hours per day using social platforms. Minimum usage hour recorded is 1.5 hours, while the maximum is 8.5 hours, which indicates a clear difference.
+-   Avg_Daily_Usage_Hours: Students have spent 4.8 hours per day using social platforms. Minimum usage hour is 1.5 hours, while the maximum is 8.5 hours.
 
--   Conflicts_Over_Social_Media: Students have a median of 3 conflicts with other people who are close to them. Although some do not have any conflict occurring between them and their loved one, some still have had 5 conflicts.
+-   Conflicts_Over_Social_Media: Students have a median of 3 conflicts with other people who are close to them. Although some have no conflict with their loved one, some still have had 5 conflicts.
 
--   Affects_Academic_Performance: 64% of students of the entire sample agreed that their studies have been impacted negatively by using social media.
+-   Affects_Academic_Performance: 64% of students agreed that their studies have been impacted negatively by using social media.
 
 ```{r}
 #| label: tbl-summary
@@ -256,13 +255,13 @@ The results showed that high levels of social media addiction had a strong impac
 
 1.  Maybe student's consumption of negative content on social media affects their mental health and behavior, including posts that call for toxic self-expression, support self-righteousness, etc.
 
-2.  Excessive screen time can increase stress in young people (Martin P. Paulus et al., 2023). Because of the psychological instability caused by screen light, they may have harsh reactions, get angry easily, and often argue with others more.
+2.  Excessive screen time can increase stress in young people (@PAULUS2023100018). Because of the psychological instability caused by screen light, they may have harsh reactions, get angry easily, and often argue with others more.
 
 **Student have had their academic result impacted by using social media:** Here are two potential explanations:
 
 1.  Spending too much time on social media takes away from the time students could have spent on studying. A student who would have had 6 hours to do homework and review lessons spends that time on social media.
 
-2.  The brain tends to prefer easy activities. Studying requires the brain to work hard, while surfing social media does not require students to think much. Over time, students may find it difficult and exhausting to think or analyze logically.
+2.  According to @medium_brain_effort_2023, the brain tends to prefer easy activities. Studying requires the brain to work hard, while surfing social media does not require students to think much. Over time, students may find it difficult and exhausting to think or analyse logically.
 
 ## 6. Conclusion
 
@@ -272,7 +271,7 @@ Normally, the time spent on social media cannot completely prove whether a perso
 
 Based on the analysis results, we propose some solutions as follows:
 
--   First, education organisations should organize workshops to raise students' awareness of the negative impacts of social media abuse.
+-   First, education organisations should organise workshops to raise students' awareness of the negative impacts of social media abuse.
 
 -   Secondly, since they are spending too much time on social media, we suggest having digital marketing campaigns targeted to them, which help them become aware of these risky outcomes. For example: Run a campaign focused on the 30-day reducing time screen challenge.
 
@@ -280,4 +279,6 @@ Based on the analysis results, we propose some solutions as follows:
 
 -   Finally, due to limitations in time and research resources, this analysis only focuses on the three most fundamental aspects of self-control ability and does not delve into the causes of social media addiction. Moreover, the number of study subjects in the low-addiction group was small, which may have led to bias in the analysis. To better support future research, we suggest collecting data across level groups evenly and expanding the scope of analysis to include psychological factors as well as the content that students typically engage with on social media. Clarifying the addictive factors will help draw deeper conclusions and develop more comprehensive intervention strategies or recommendations.
 
-## 8. References
+## Packages Used
+
+This report was created using R packages including `tidyverse` [@tidyverse] and `knitr` [@knitr].
