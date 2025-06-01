@@ -1,4 +1,4 @@
-Student_ID,Addicted_Level,Avg_Daily_Usage_Hours,Conflicts_Over_Social_Media,Affects_Academic_Performance
+Student_ID,Addicted_Level,Avg_Daily_Usage_Hours,Conflicts_Over_Social_Media,Affect_Academic_Perform
 1,High,5.2,3,1
 2,Low,2.1,0,0
 3,High,6,4,1
