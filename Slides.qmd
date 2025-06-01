@@ -60,60 +60,66 @@ variable_sum <- data.frame(
                "Addicted_Level",
                "Avg_Daily_Usage_Hours", 
                "Conflicts_Over_Social_Media",
-               "Affects_Academic_Performance"
+               "Affects_Academic_Perform"
                ),
   Description = c("Unique identifier for each student", 
                   "Level of social media addiction of the student (1-3: Low, 4-6: Medium, 7-10: High)",
-                  "Number of hours students spends using social media per day",
-                  "Number of arguments or disagreements student have with their family, friends and/or partners",
-                  "Student have had their academic result impacted by using social media (1: Yes, 0: No)"
+                  "Daily hours students spend on social media",
+                  "Number of social media-related conflicts with family, friends, or partners",
+                  "Whether social media use affects academic results (1: Yes, 0: No)"
                   )
 )
 
-knitr::kable(variable_sum, caption = "Summary of dataset variables")
+knitr::kable(variable_sum, 
+             caption = "Summary of dataset variables"
+)
 ```
 
-**Processing data**
+**Cleaning data**
 
 -   Categorized `Addicted_Score` into `Addicted_Level`:
 
     -   **Low (1–3)**, **Medium (4–6)**, **High (7–10)**
 
--   Recoded `Affects_Academic_Performance` to binary (1 = Yes, 0 = No)
+-   Recoded `Affects_Academic_Perform` to binary (1 = Yes, 0 = No)
 
 -   Removed irrelevant variables
 
 ## Methods
 
 Our research question is:\
-**Does social media addiction reduce students’ self-control?**
+**Does the addiction to social media reduce student's sense of self-control?**
 
 To explore this, we examined differences across three addiction groups (Low / Medium / High) in relation to:
 
 -   **Time management** → Avg_Daily_Usage_Hours\
 -   **Emotional regulation** → Conflicts_Over_Social_Media\
--   **Academic impact** → Affects_Academic_Performance
+-   **Academic impact** → Affects_Academic_Perform
 
-We applied descriptive analysis, summarizing each variable by addiction group and visualizing patterns using bar plots and box plots.
+We applied descriptive analysis, summarizing each variable by addiction group and visualizing patterns using bar plots, box plot and jitter plot.
 
 ## Descriptive Summary
 
 ```{r}
 raw_data <- read_csv("data/Students_Social_Media_Addiction.csv")
+
 processed_data <- raw_data %>%
   mutate(Addicted_Level = case_when(
             Addicted_Score <= 3 ~ "Low",
             Addicted_Score <= 6 ~ "Medium",
             TRUE ~ "High"
         ),
-        Addicted_Level = factor(Addicted_Level, levels = c("Low", "Medium", "High")),
-    Affects_Academic_Performance = ifelse(Affects_Academic_Performance == "Yes", 1, 0)
-        ) %>%
+        Addicted_Level = factor(Addicted_Level, 
+                                levels = c("Low", "Medium", "High")
+                          ),
+    Affect_Academic_Perform = ifelse(Affects_Academic_Performance == "Yes", 1, 0)
+  ) %>%
   select(Student_ID,
          Addicted_Level,
          Avg_Daily_Usage_Hours, 
          Conflicts_Over_Social_Media, 
-         Affects_Academic_Performance)
+         Affect_Academic_Perform
+  )
 ```
 
 ::::: columns
@@ -122,23 +128,35 @@ processed_data <- raw_data %>%
 #| label: fig-summary
 #| fig-cap: "Number of Students by Addiction Level"
 
-ggplot(processed_data, aes(x = Addicted_Level, fill = Addicted_Level)) +
-  geom_bar(alpha = 0.85, width = 0.6, color = "skyblue") +
-  scale_fill_brewer(palette = "Blues") +
-  labs(
-    x = "Addiction Level",
-    y = "Count of Students"
+ ggplot(processed_data, 
+       aes(x = Addicted_Level, 
+           fill = Addicted_Level
+       )
+) +
+  geom_bar(width = 0.6, 
+           alpha = 0.85
   ) +
-  geom_hline(yintercept = 0, color = "black", linewidth = 0.6) +
+  geom_text(stat = "count", 
+            aes(label = after_stat(count)), 
+            vjust = -0.4, 
+            color = "black", 
+            fontface = "bold", 
+            size = 5
+  ) +
+  scale_fill_brewer(palette = "Blues") +
+  labs(x = "Addiction Level", 
+       y = "Count of Students"
+  ) +
   theme_minimal(base_size = 12) +
   theme(
-    plot.title = element_text(size = 12, face = "bold"),
-    axis.title = element_text(size = 10),
-    axis.text = element_text(size = 9),
-    panel.grid.major.y = element_line(color = "gray90"),
-    panel.grid.minor = element_blank(),
+    axis.title = element_text(size = 10, 
+                              face = "bold"
+    ),
+    axis.text = element_text(size = 10),
     legend.position = "none",
-    )
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_line(color = "gray90")
+  )
 ```
 :::
 
@@ -157,10 +175,13 @@ ggplot(processed_data, aes(x = Addicted_Level, fill = Addicted_Level)) +
 
 ```{r}
 #| label: tbl-summary
-#| tbl-cap: "Summary statistics of three dependent variables"
+#| tbl-cap: "Summary statistics of thre dependent variables"
 
 summary_vars <- processed_data %>%
-  select(Avg_Daily_Usage_Hours, Conflicts_Over_Social_Media, Affects_Academic_Performance)
+  select(Avg_Daily_Usage_Hours, 
+         Conflicts_Over_Social_Media, 
+         Affect_Academic_Perform
+  )
 
 summary_table <- summary_vars %>%
   summarise(across(
@@ -181,7 +202,10 @@ summary_table <- summary_vars %>%
     names_from = Statistic,
     values_from = value
   )
-kable(summary_table, digits = 2)
+
+kable(summary_table, 
+      digits = 2
+)
 ```
 
 ## Results: Usage Hours
@@ -190,8 +214,17 @@ kable(summary_table, digits = 2)
 #| label: fig-usage-hours
 #| fig-cap: "Daily Social Media Usage by Addiction Level"
 
-ggplot(processed_data, aes(x = Addicted_Level, y = Avg_Daily_Usage_Hours, fill = Addicted_Level)) +
-  geom_boxplot(alpha = 0.85, width = 0.6, outlier.color = "darkgray", outlier.shape = 16) +
+ggplot(processed_data, 
+       aes(x = Addicted_Level, 
+           y = Avg_Daily_Usage_Hours, 
+           fill = Addicted_Level
+       )
+) +
+  geom_boxplot(alpha = 0.85, 
+               width = 0.6, 
+               outlier.color = "darkgray", 
+               outlier.shape = 16
+  ) +
   scale_fill_brewer(palette = "Blues") +
   labs(
     x = "Addiction Level",
@@ -199,13 +232,14 @@ ggplot(processed_data, aes(x = Addicted_Level, y = Avg_Daily_Usage_Hours, fill =
   ) +
   theme_minimal(base_size = 12) +
   theme(
-    plot.title = element_text(size = 12, face = "bold"),
-    axis.title = element_text(size = 10),
-    axis.text = element_text(size = 9),
-    panel.grid.major.y = element_line(color = "gray90"),
-    panel.grid.minor = element_blank(),
+    axis.title = element_text(size = 10, 
+                              face = "bold"
+    ),
+    axis.text = element_text(size = 10),
     legend.position = "none",
-)
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_line(color = "gray90")
+  )
 ```
 
 -   High group: \~6 hours/day
@@ -217,24 +251,41 @@ ggplot(processed_data, aes(x = Addicted_Level, y = Avg_Daily_Usage_Hours, fill =
 ::: {.column width="50%"}
 ```{r}
 #| label: fig-conflict-num
-#| fig-cap: "Number of Social Conflicts by Addiction Level"
+#| fig-cap: "Social Conflicts by Addiction Level (Jitter); Black Lines Show Group Medians"
 
-ggplot(processed_data, aes(x = Addicted_Level, y = Conflicts_Over_Social_Media, fill = Addicted_Level)) +
-  geom_boxplot(alpha = 0.85, width = 0.6, outlier.color = "darkgray", outlier.shape = 16) +
-  scale_fill_brewer(palette = "Blues") +
+ggplot(processed_data, 
+       aes(x = Addicted_Level, 
+           y = Conflicts_Over_Social_Media, 
+           color = Addicted_Level
+       )
+) +
+  geom_jitter(width = 0.2, 
+              height = 0, 
+              size = 2.5, 
+              alpha = 0.7
+  ) +
+  stat_summary(fun = median, 
+               geom = "crossbar", 
+               width = 0.4, 
+               fatten = 2, 
+               color = "black"
+  ) +
+  scale_y_continuous(breaks = 0:5) +
+  scale_color_brewer(palette = "Blues") +
   labs(
     x = "Addiction Level",
     y = "Number of Conflicts"
   ) +
   theme_minimal(base_size = 12) +
   theme(
-    plot.title = element_text(size = 12, face = "bold"),
-    axis.title = element_text(size = 10),
-    axis.text = element_text(size = 9),
-    panel.grid.major.y = element_line(color = "gray90"),
-    panel.grid.minor = element_blank(),
+    axis.title = element_text(size = 10, 
+                              face = "bold"
+    ),
+    axis.text = element_text(size = 10),
     legend.position = "none",
-)
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_line(color = "gray90")
+  )
 ```
 :::
 
@@ -247,27 +298,39 @@ percentage_summary <- processed_data %>%
   group_by(Addicted_Level) %>%
   summarise(
     Count = n(),
-    Affected = sum(Affects_Academic_Performance),
+    Affected = sum(Affect_Academic_Perform),
     Percentage = Affected / Count * 100
   )
 
-ggplot(percentage_summary, aes(x = Addicted_Level, y = Percentage, fill = Addicted_Level)) +
-  geom_col(alpha = 0.85, width = 0.6, color = "skyblue") +
-  scale_fill_brewer(palette = "Blues") +
-  labs(
-    x = "Addiction Level",
-    y = "Academic Impact (%)"
+ggplot(percentage_summary, 
+       aes(x = Addicted_Level, 
+           y = Percentage, 
+           fill = Addicted_Level
+       )
+) +
+  geom_col(alpha = 0.85, 
+           width = 0.6
   ) +
-  geom_hline(yintercept = 0, color = "black", linewidth = 0.6) +
+  geom_text(aes(label = round(Percentage, 1)), 
+            vjust = -0.4, 
+            color = "black", 
+            fontface = "bold", 
+            size = 5
+  ) +
+  scale_fill_brewer(palette = "Blues") +
+  labs(x = "Addiction Level", 
+       y = "Academic Impact (%)"
+  ) +
   theme_minimal(base_size = 12) +
   theme(
-    plot.title = element_text(size = 12, face = "bold"),
-    axis.title = element_text(size = 10),
-    axis.text = element_text(size = 9),
-    panel.grid.major.y = element_line(color = "gray90"),
-    panel.grid.minor = element_blank(),
+    axis.title = element_text(size = 10, 
+                              face = "bold"
+    ),
+    axis.text = element_text(size = 10),
     legend.position = "none",
-)
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_line(color = "gray90")
+  )
 ```
 :::
 :::::
